@@ -9,21 +9,23 @@ export default function PostList({ posts }: Props) {
   if (posts.length === 0) {
     return (
       <div className="empty-state">
-        <p className="empty-state-title">No posts yet</p>
-        <p className="empty-state-text">Create your first blog post to get started.</p>
+        <svg className="empty-state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+        </svg>
+        <p className="empty-state-title">Nothing here yet</p>
+        <p className="empty-state-text">Your first post is waiting to be written.</p>
         <Link to="/posts/new" className="btn btn-primary">
-          Create Post
+          Start Writing
         </Link>
       </div>
     );
   }
 
   return (
-    <ul className="post-list" style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+    <ul className="post-list">
       {posts.map((post) => (
         <li key={post.id} className="post-item">
           <Link to={`/posts/${post.id}`} className="post-item-link">
-            <h2 className="post-item-title">{post.title}</h2>
             <p className="post-item-meta">
               {new Date(post.created_at).toLocaleDateString("en-US", {
                 year: "numeric",
@@ -31,9 +33,10 @@ export default function PostList({ posts }: Props) {
                 day: "numeric",
               })}
             </p>
+            <h2 className="post-item-title">{post.title}</h2>
             <p className="post-item-excerpt">
-              {post.content.length > 150
-                ? post.content.slice(0, 150) + "..."
+              {post.content.length > 180
+                ? post.content.slice(0, 180) + "..."
                 : post.content}
             </p>
           </Link>

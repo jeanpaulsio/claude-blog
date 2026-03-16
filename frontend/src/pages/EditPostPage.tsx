@@ -4,6 +4,14 @@ import { fetchPost, updatePost } from "../api/posts";
 import PostForm from "../components/PostForm";
 import type { Post } from "../types/post";
 
+function BackArrow() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M19 12H5M12 19l-7-7 7-7" />
+    </svg>
+  );
+}
+
 export default function EditPostPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -29,9 +37,11 @@ export default function EditPostPage() {
   return (
     <>
       <Link to={`/posts/${post.id}`} className="back-link">
-        &larr; Back to post
+        <BackArrow />
+        Back to Post
       </Link>
       <h1 className="form-title">Edit Post</h1>
+      <span className="form-title-accent" />
       <PostForm
         initialValues={{ title: post.title, content: post.content }}
         onSubmit={handleSubmit}

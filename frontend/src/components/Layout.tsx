@@ -8,14 +8,17 @@ export default function Layout() {
           <Link to="/" className="header-logo">
             Claude Blog
           </Link>
-          <Link to="/posts/new" className="btn btn-primary">
-            New Post
-          </Link>
+          <nav className="header-nav">
+            <Link to="/posts/new">Write</Link>
+          </nav>
         </div>
       </header>
       <main className="main">
         <Outlet />
       </main>
+      <footer className="footer">
+        <p className="footer-text">Built with FastAPI & React</p>
+      </footer>
     </div>
   );
 }

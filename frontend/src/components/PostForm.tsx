@@ -40,7 +40,7 @@ export default function PostForm({
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="form-input"
-          placeholder="Enter your post title"
+          placeholder="Give your post a title"
         />
       </div>
       <div className="form-group">
@@ -52,7 +52,7 @@ export default function PostForm({
           value={content}
           onChange={(e) => setContent(e.target.value)}
           className="form-textarea"
-          placeholder="Write your post content..."
+          placeholder="Start writing..."
         />
       </div>
       <div className="form-actions">
