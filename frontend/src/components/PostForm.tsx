@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   initialValues?: { title: string; content: string };
@@ -11,6 +12,7 @@ export default function PostForm({
   onSubmit,
   submitLabel = "Save",
 }: Props) {
+  const navigate = useNavigate();
   const [title, setTitle] = useState(initialValues?.title ?? "");
   const [content, setContent] = useState(initialValues?.content ?? "");
   const [error, setError] = useState("");
@@ -26,10 +28,10 @@ export default function PostForm({
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <div style={{ marginBottom: "1rem" }}>
-        <label htmlFor="title" style={{ display: "block", marginBottom: 4 }}>
+    <form onSubmit={handleSubmit} className="form-container">
+      {error && <p className="form-error">{error}</p>}
+      <div className="form-group">
+        <label htmlFor="title" className="form-label">
           Title
         </label>
         <input
@@ -37,22 +39,30 @@ export default function PostForm({
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          style={{ width: "100%", padding: "0.5rem", boxSizing: "border-box" }}
+          className="form-input"
+          placeholder="Enter your post title"
         />
       </div>
-      <div style={{ marginBottom: "1rem" }}>
-        <label htmlFor="content" style={{ display: "block", marginBottom: 4 }}>
+      <div className="form-group">
+        <label htmlFor="content" className="form-label">
           Content
         </label>
         <textarea
           id="content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          rows={10}
-          style={{ width: "100%", padding: "0.5rem", boxSizing: "border-box" }}
+          className="form-textarea"
+          placeholder="Write your post content..."
         />
       </div>
-      <button type="submit">{submitLabel}</button>
+      <div className="form-actions">
+        <button type="submit" className="btn btn-primary">
+          {submitLabel}
+        </button>
+        <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>
+          Cancel
+        </button>
+      </div>
     </form>
   );
 }

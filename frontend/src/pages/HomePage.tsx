@@ -15,8 +15,15 @@ export default function HomePage() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
+  if (loading) return <p className="loading">Loading posts...</p>;
+  if (error) return <p className="error-message">{error}</p>;
 
-  return <PostList posts={posts} />;
+  return (
+    <>
+      <div className="page-header">
+        <h1 className="page-title">Posts</h1>
+      </div>
+      <PostList posts={posts} />
+    </>
+  );
 }

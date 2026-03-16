@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createPost } from "../api/posts";
 import PostForm from "../components/PostForm";
 
@@ -12,8 +12,11 @@ export default function CreatePostPage() {
 
   return (
     <>
-      <h1>New Post</h1>
-      <PostForm onSubmit={handleSubmit} submitLabel="Create" />
+      <Link to="/" className="back-link">
+        &larr; Back to posts
+      </Link>
+      <h1 className="form-title">New Post</h1>
+      <PostForm onSubmit={handleSubmit} submitLabel="Publish" />
     </>
   );
 }

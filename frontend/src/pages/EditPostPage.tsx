@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { fetchPost, updatePost } from "../api/posts";
 import PostForm from "../components/PostForm";
 import type { Post } from "../types/post";
@@ -23,12 +23,15 @@ export default function EditPostPage() {
     navigate(`/posts/${Number(id)}`);
   }
 
-  if (loading) return <p>Loading...</p>;
-  if (!post) return <p>Post not found.</p>;
+  if (loading) return <p className="loading">Loading...</p>;
+  if (!post) return <p className="error-message">Post not found.</p>;
 
   return (
     <>
-      <h1>Edit Post</h1>
+      <Link to={`/posts/${post.id}`} className="back-link">
+        &larr; Back to post
+      </Link>
+      <h1 className="form-title">Edit Post</h1>
       <PostForm
         initialValues={{ title: post.title, content: post.content }}
         onSubmit={handleSubmit}

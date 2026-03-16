@@ -19,30 +19,39 @@ export default function PostPage() {
   }, [id]);
 
   async function handleDelete() {
-    if (!post || !window.confirm("Delete this post?")) return;
+    if (!post || !window.confirm("Are you sure you want to delete this post?")) return;
     await deletePost(post.id);
     navigate("/");
   }
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
-  if (!post) return <p>Post not found.</p>;
+  if (loading) return <p className="loading">Loading post...</p>;
+  if (error) return <p className="error-message">{error}</p>;
+  if (!post) return <p className="error-message">Post not found.</p>;
 
   return (
-    <article>
-      <h1>{post.title}</h1>
-      <small style={{ color: "#666" }}>
-        {new Date(post.created_at).toLocaleDateString()}
-      </small>
-      <div style={{ marginTop: "1rem", whiteSpace: "pre-wrap" }}>
-        {post.content}
-      </div>
-      <div style={{ marginTop: "2rem", display: "flex", gap: "1rem" }}>
-        <Link to={`/posts/${post.id}/edit`}>Edit</Link>
-        <button onClick={handleDelete} style={{ color: "red", background: "none", border: "none", cursor: "pointer" }}>
-          Delete
-        </button>
-      </div>
-    </article>
+    <>
+      <Link to="/" className="back-link">
+        &larr; Back to posts
+      </Link>
+      <article className="post-detail">
+        <h1 className="post-detail-title">{post.title}</h1>
+        <p className="post-detail-meta">
+          {new Date(post.created_at).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </p>
+        <div className="post-detail-content">{post.content}</div>
+        <div className="post-detail-actions">
+          <Link to={`/posts/${post.id}/edit`} className="btn btn-secondary">
+            Edit
+          </Link>
+          <button onClick={handleDelete} className="btn btn-danger">
+            Delete
+          </button>
+        </div>
+      </article>
+    </>
   );
 }
