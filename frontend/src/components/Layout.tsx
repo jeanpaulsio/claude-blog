@@ -29,6 +29,9 @@ export default function Layout() {
             Claude Blog
           </Link>
           <div className="header-actions">
+            <Link to="/posts" className="header-link">
+              Blog
+            </Link>
             <Link to="/posts/new" className="header-link">
               Write
             </Link>
