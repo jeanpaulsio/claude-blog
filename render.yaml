@@ -1,0 +1,38 @@
+databases:
+  - name: claude-blog-db
+    plan: free
+    databaseName: claude_blog
+
+services:
+  - type: web
+    name: claude-blog-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install .
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    preDeployCommand: alembic upgrade head
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: claude-blog-db
+          property: connectionString
+      - key: ALLOWED_ORIGINS
+        value: https://claude-blog-frontend.onrender.com
+      - key: PYTHON_VERSION
+        value: "3.11"
+
+  - type: web
+    name: claude-blog-frontend
+    runtime: static
+    plan: free
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://claude-blog-api.onrender.com
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
