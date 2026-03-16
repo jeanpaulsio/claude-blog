@@ -19,7 +19,7 @@ services:
       - key: ALLOWED_ORIGINS
         value: https://claude-blog-frontend.onrender.com
       - key: PYTHON_VERSION
-        value: "3.11"
+        value: "3.11.7"
 
   - type: web
     name: claude-blog-frontend
