@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import type { Post } from "../types/post";
+import { readingTime } from "../utils/readingTime";
 
 interface Props {
   posts: Post[];
@@ -32,6 +33,8 @@ export default function PostList({ posts }: Props) {
                 month: "long",
                 day: "numeric",
               })}
+              <span className="meta-dot">&middot;</span>
+              {readingTime(post.content)}
             </p>
             <h2 className="post-item-title">{post.title}</h2>
             <p className="post-item-excerpt">

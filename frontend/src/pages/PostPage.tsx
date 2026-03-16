@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import Markdown from "react-markdown";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { deletePost, fetchPost } from "../api/posts";
 import type { Post } from "../types/post";
+import { readingTime } from "../utils/readingTime";
 
 function BackArrow() {
   return (
@@ -50,10 +52,14 @@ export default function PostPage() {
               month: "long",
               day: "numeric",
             })}
+            <span className="meta-dot">&middot;</span>
+            {readingTime(post.content)}
           </p>
           <h1 className="post-detail-title">{post.title}</h1>
         </header>
-        <div className="post-detail-content">{post.content}</div>
+        <div className="post-detail-content prose">
+          <Markdown>{post.content}</Markdown>
+        </div>
         <div className="post-detail-actions">
           <Link to={`/posts/${post.id}/edit`} className="btn btn-secondary">
             Edit
