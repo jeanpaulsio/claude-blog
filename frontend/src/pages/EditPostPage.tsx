@@ -41,7 +41,7 @@ export default function EditPostPage() {
         Back to Post
       </Link>
       <h1 className="form-title">Edit Post</h1>
-      <span className="form-title-accent" />
+      <span className="form-title-rule" />
       <PostForm
         initialValues={{ title: post.title, content: post.content }}
         onSubmit={handleSubmit}

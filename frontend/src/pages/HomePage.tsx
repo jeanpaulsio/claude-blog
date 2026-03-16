@@ -23,7 +23,7 @@ export default function HomePage() {
       <div className="page-header">
         <h1 className="page-title">
           Latest Posts
-          <span className="page-title-accent" />
+          <span className="page-title-rule" />
         </h1>
       </div>
       <PostList posts={posts} />

@@ -25,7 +25,7 @@ export default function CreatePostPage() {
         All Posts
       </Link>
       <h1 className="form-title">New Post</h1>
-      <span className="form-title-accent" />
+      <span className="form-title-rule" />
       <PostForm onSubmit={handleSubmit} submitLabel="Publish" />
     </>
   );
