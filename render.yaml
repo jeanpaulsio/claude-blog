@@ -25,7 +25,7 @@ services:
     name: claude-blog-frontend
     runtime: static
     rootDir: frontend
-    buildCommand: npm ci && npm run build
+    buildCommand: npm ci --include=dev && npm run build
     staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
