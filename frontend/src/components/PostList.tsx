@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import type { Post } from "../types/post";
 import { readingTime } from "../utils/readingTime";
+import { stripMarkdown } from "../utils/stripMarkdown";
 
 interface Props {
   posts: Post[];
@@ -38,9 +39,10 @@ export default function PostList({ posts }: Props) {
             </p>
             <h2 className="post-item-title">{post.title}</h2>
             <p className="post-item-excerpt">
-              {post.content.length > 180
-                ? post.content.slice(0, 180) + "..."
-                : post.content}
+              {(() => {
+                const plain = stripMarkdown(post.content);
+                return plain.length > 180 ? plain.slice(0, 180) + "..." : plain;
+              })()}
             </p>
           </Link>
         </li>

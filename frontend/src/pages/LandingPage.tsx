@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { fetchPosts } from "../api/posts";
 import type { Post } from "../types/post";
 import { readingTime } from "../utils/readingTime";
+import { stripMarkdown } from "../utils/stripMarkdown";
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-US", {
@@ -77,9 +78,10 @@ export default function LandingPage() {
               </p>
               <h3 className="featured-title">{featured.title}</h3>
               <p className="featured-excerpt">
-                {featured.content.length > 280
-                  ? featured.content.slice(0, 280) + "..."
-                  : featured.content}
+                {(() => {
+                  const plain = stripMarkdown(featured.content);
+                  return plain.length > 280 ? plain.slice(0, 280) + "..." : plain;
+                })()}
               </p>
               <span className="featured-read">
                 Read more <ArrowRight />
@@ -118,9 +120,10 @@ export default function LandingPage() {
                   </p>
                   <h3 className="recent-title">{post.title}</h3>
                   <p className="recent-excerpt">
-                    {post.content.length > 120
-                      ? post.content.slice(0, 120) + "..."
-                      : post.content}
+                    {(() => {
+                      const plain = stripMarkdown(post.content);
+                      return plain.length > 120 ? plain.slice(0, 120) + "..." : plain;
+                    })()}
                   </p>
                 </div>
               </Link>
