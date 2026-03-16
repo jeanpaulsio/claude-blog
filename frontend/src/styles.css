@@ -556,6 +556,60 @@ body {
   line-height: 1.7;
 }
 
+/* Editor tabs */
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.editor-tabs {
+  display: flex;
+  gap: 2px;
+  background-color: var(--color-surface-raised);
+  border-radius: var(--radius-sm);
+  padding: 2px;
+}
+
+.editor-tab {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.625rem;
+  border: none;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.editor-tab:hover {
+  color: var(--color-text-secondary);
+}
+
+.editor-tab-active {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-sm);
+}
+
+.editor-preview {
+  min-height: 260px;
+  padding: 1rem;
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.editor-preview-empty {
+  color: var(--color-text-tertiary);
+  font-style: italic;
+}
+
 .form-error {
   font-size: 0.875rem;
   color: var(--color-danger);
