@@ -15,3 +15,8 @@ app.add_middleware(
 )
 
 app.include_router(posts_router, prefix="/api")
+
+
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
